@@ -153,7 +153,7 @@ function currentTimePlus5() {
 
   let hour = day.getHours();
 
-  let min = day.getMinutes() + 1;
+  let min = day.getMinutes() + 5;
 
   if (min < 10) {
     min = "0" + min;
