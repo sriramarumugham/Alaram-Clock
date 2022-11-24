@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
     <title>Alaram Clock</title>
 </head>
 <body>
+    <div id="wrapper">
     <!-- DISPAY TO SHOW THE TIME -->
     <h1 id="TimeDisplayer"></h1>
 
     <!-- FORM -->
-    <></>
     <label  for="alaram-time">Alaram Time</label>
     <input name="alaram-time" id="alaram-time" type="time" placeholder="Alaram time"></input>
 
@@ -19,14 +20,17 @@
     <input name="alaram-date" id="alaram-date" type="date" placeholder="Alaram date"></input>
 
     <button id="setAlaram">Set Alaram</button>
+
+    <!-- TO SHOW THE ALARAMS STATUS -->
     <div id="fireAlaramContainer">
         <h1>Alaram</h1>
         <h3>Status: <span id="alaram-status" >OFF</span></h3>
         <button id="snooze-button">Snooze</button> <button id="off-alaram">OFF</button>
-        <!-- <h3 ><span id="snooze-count">0</span> /3</h3>  -->
     </div>
-    <ul id="upcomming-alaram"></ul>
 
+    <!-- LIST TO RENDE THE LIST OF ALARMS -->
+    <ul id="upcomming-alaram"></ul>
+</div>
     <script src="index.js"></script>
 </body>
 </html>

@@ -75,7 +75,7 @@ function checkAlarams() {
     ) {
       document.getElementById("alaram-status").innerHTML = "ON";
       clock.alarams[i].active = true;
-      console.log("i changed", alaramsArray[i].active);
+      console.log("changed state to", alaramsArray[i].active);
       return;
     }
   }
@@ -153,7 +153,7 @@ function currentTimePlus5() {
 
   let hour = day.getHours();
 
-  let min = day.getMinutes() + 5;
+  let min = day.getMinutes() + 1;
 
   if (min < 10) {
     min = "0" + min;
