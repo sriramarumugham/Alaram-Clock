@@ -2,12 +2,14 @@ let clock = {
   alarams: [],
 };
 
-// add to objects
-let alarmButton = document.getElementById("setAlaram");
-let display = document.getElementById("TimeDisplayer");
+// add to objects;
 
-// add a alaram
-alarmButton.addEventListener("click", function () {
+let addAlarms = document.getElementById("setAlaram");
+
+let displayTime = document.getElementById("TimeDisplayer");
+
+// add a alaram;
+addAlarms.addEventListener("click", function () {
   let time = document.getElementById("alaram-time");
   let date = document.getElementById("alaram-date");
 
@@ -33,7 +35,7 @@ function renderAlarams() {
   let alaramDisplayer = document.getElementById("upcomming-alaram");
   let text = "";
   let arlarmsArray = clock.alarams;
-  console.log(arlarmsArray);
+
   for (let i = 0; i < arlarmsArray.length; i++) {
     text +=
       `<li> Time:${arlarmsArray[i].time}` +
@@ -43,7 +45,7 @@ function renderAlarams() {
       ", Snoozed :" +
       `${arlarmsArray[i].snoozed}` +
       " " +
-      `, Snooze Count: ${arlarmsArray[i].snooze} ` + 
+      `, Snooze Count: ${arlarmsArray[i].snooze} ` +
       `, Alaram Status: ${arlarmsArray[i].active}` +
       "</li>";
   }
@@ -54,11 +56,9 @@ function renderAlarams() {
 let interval = setInterval(function () {
   let date = new Date();
 
-  display.innerHTML = date;
+  displayTime.innerHTML = date;
   checkAlarams();
   renderAlarams();
-  // active alarams
-  // checkAnyActiveAlarams();
 }, 1000);
 
 //show the acitve alaram and alerts
@@ -91,6 +91,7 @@ function checkAnyActiveAlarams() {
     if (alaramsArray[i].active == true) {
       console.log("active", alaramsArray[i].time);
 
+      // IF THE ALARAM IS NOT SNOOZED BEFORE INCREASE THE COUTN CHANGE THE STATE
       if (alaramsArray[i].snoozed == false) {
         clock.alarams[i].snoozed = true;
         clock.alarams[i].time = currentTimePlus5();
@@ -98,25 +99,30 @@ function checkAnyActiveAlarams() {
         clock.alarams[i].active = false;
         document.getElementById("alaram-status").innerHTML = "OFF";
       } else {
+        // IF THE ALARAM IS  SNOOZED BEFORE INCREASE THE COUTN CHANGE THE STATE
         if (alaramsArray[i].snooze >= 0 && alaramsArray[i].snooze < 3) {
           clock.alarams[i].snooze = clock.alarams[i].snooze + 1;
           clock.alarams[i].time = currentTimePlus5();
           document.getElementById("alaram-status").innerHTML = "OFF";
           clock.alarams[i].active = false;
-        } else {
+        }
+        // IF SNOOZE LIMIT REACHED
+        else {
           clock.alarams[i].time = "";
           clock.alarams[i].date = "";
           clock.alarams[i].active = false;
           clock.alarams[i].snoozed = false;
           clock.alarams[i].snooze = 0;
+          //IF YOU HAVE SNOOZED MORET HAN 3 TIME DELET THE ALARAM FROM THE LIST OF ACTIVE ALARMS
           clock.alarams[i] = clock.alarams[i].splice(i, i);
-
           document.getElementById("alaram-status").innerHTML = "OFF";
         }
       }
     }
   }
 }
+
+//RETURN THE CURRENT DAY IN  A STRING
 
 function currentDay() {
   let day = new Date();
@@ -125,6 +131,8 @@ function currentDay() {
   date = day.getFullYear() + "-" + (day.getMonth() + 1) + "-" + day.getDate();
   return date;
 }
+
+//RETURN THE CURRENT TIME IN  A STRING
 function currnetTime() {
   let day = new Date();
   let hour = day.getHours();
@@ -139,11 +147,14 @@ function currnetTime() {
 
   return time;
 }
-
+// RETURNS SNOOZED TIEM AFTER 5 MIN FOR TEST THE SNOOZED TIME IS 1 MIN
 function currentTimePlus5() {
   let day = new Date();
+
   let hour = day.getHours();
-  let min = day.getMinutes() + 1;
+
+  let min = day.getMinutes() + 5;
+
   if (min < 10) {
     min = "0" + min;
   }
